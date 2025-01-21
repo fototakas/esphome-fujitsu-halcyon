@@ -72,7 +72,6 @@ void FujitsuHalcyonController::dump_config() {
     ESP_LOGCONFIG(TAG, "  Remote Temperature Controller Address: %u (%s)", this->temperature_controller_address_, ControllerName[std::clamp(static_cast<size_t>(this->temperature_controller_address_), 0u, ControllerName.size() - 1)]);
     LOG_SENSOR("  ", "Remote Temperature Controller Sensor", this->remote_sensor);
     LOG_SENSOR("  ", "Temperature Sensor", this->temperature_sensor_);
-    ESP_LOGCONFIG(TAG, "  Use Sensor: %s", this->use_sensor_switch->state ? "YES" : "NO");
     ESP_LOGCONFIG(TAG, "  Ignore Lock: %s", this->ignore_lock_ ? "YES" : "NO");
     LOG_TZSP("  ", this);
 
