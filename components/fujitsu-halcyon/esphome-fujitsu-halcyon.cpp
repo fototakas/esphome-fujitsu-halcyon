@@ -35,15 +35,14 @@ void FujitsuHalcyonController::setup() {
 
     // Use specified sensor for this components reported temperature
     if (this->temperature_sensor_ != nullptr)
-        this->temperature_sensor_->add_on_raw_state_callback([this](float temperature) {
-            if (this->use_sensor_switch->state) {
-                this->current_temperature = temperature;
-                this->publish_state();
-            }
+    this->temperature_sensor_->add_on_raw_state_callback([this](float temperature) {
+        // Update the current temperature and publish the state
+        this->current_temperature = temperature;
+        this->publish_state();
 
-            // Send this temperature to the Fujitsu IU
-            this->controller->set_current_temperature(temperature);
-        });
+        // Send this temperature to the Fujitsu IU
+        this->controller->set_current_temperature(temperature);
+    });
 
 /*
     // Not sure if should timeout, or wait forever.
@@ -143,7 +142,7 @@ climate::ClimateTraits FujitsuHalcyonController::traits() {
     }
 
     // Expose feature dependent components
-    if (features.SensorSwitching && this->temperature_sensor_ != nullptr)
+    if (this->temperature_sensor_ != nullptr)
         this->use_sensor_switch->set_internal(false);
     if (features.HorizontalLouvers)
         this->advance_vertical_louver_button->set_internal(false);
