@@ -52,7 +52,7 @@ class FujitsuHalcyonController : public Component, public climate::Climate, publ
         CustomButton* reset_filter_button = new CustomButton([this]() { this->controller->reset_filter(this->ignore_lock_); });
         CustomButton* advance_vertical_louver_button = new CustomButton([this]() { this->controller->advance_vertical_louver(this->ignore_lock_); });
         CustomButton* advance_horizontal_louver_button = new CustomButton([this]() { this->controller->advance_horizontal_louver(this->ignore_lock_); });
-        CustomSwitch* use_sensor_switch = new CustomSwitch([this](bool state) { return this->controller->use_sensor(state, this->ignore_lock_); });
+        //CustomSwitch* use_sensor_switch = new CustomSwitch([this](bool state) { return this->controller->use_sensor(state, this->ignore_lock_); });
 
         FujitsuHalcyonController(uart::IDFUARTComponent *parent, uint8_t controller_address) : uart::UARTDevice(parent), controller_address_(controller_address) {}
 
