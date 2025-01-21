@@ -136,9 +136,6 @@ async def to_code(config):
     varx = cg.Pvariable(config[CONF_ERROR_CODE][CONF_ID], var.error_code_sensor)
     await text_sensor.register_text_sensor(varx, config[CONF_ERROR_CODE])
 
-    varx = cg.Pvariable(config[CONF_USE_SENSOR][CONF_ID], var.use_sensor_switch)
-    await switch.register_switch(varx, config[CONF_USE_SENSOR])
-
     varx = cg.Pvariable(config[CONF_ADVANCE_VERTICAL_LOUVER][CONF_ID], var.advance_vertical_louver_button)
     await button.register_button(varx, config[CONF_ADVANCE_VERTICAL_LOUVER])
 
