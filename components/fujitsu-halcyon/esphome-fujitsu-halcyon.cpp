@@ -142,7 +142,7 @@ climate::ClimateTraits FujitsuHalcyonController::traits() {
 
     // Expose feature dependent components
     if (this->temperature_sensor_ != nullptr)
-        this->use_sensor_switch->set_internal(false);
+        this->controller->use_sensor(true, this->ignore_lock_);
     if (features.HorizontalLouvers)
         this->advance_vertical_louver_button->set_internal(false);
     if (features.VerticalLouvers)
