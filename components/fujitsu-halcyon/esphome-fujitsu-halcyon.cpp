@@ -35,6 +35,7 @@ void FujitsuHalcyonController::setup() {
 
     // Use specified sensor for this components reported temperature
     if (this->temperature_sensor_ != nullptr)
+        this->use_sensor_switch->state = true;
         this->temperature_sensor_->add_on_raw_state_callback([this](float temperature) {
             if (this->use_sensor_switch->state) {
                 this->current_temperature = temperature;
