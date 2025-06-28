@@ -31,7 +31,7 @@ bool Controller::start() {
     }
 
     if (!uart_is_driver_installed(this->uart_num)) {
-        err = uart_driver_install(this->uart_num, UART_FIFO_LEN * 2, UART_FIFO_LEN * 2, queue_size, &this->uart_event_queue, intr_alloc_flags);
+        err = uart_driver_install(this->uart_num, UART_HW_FIFO_LEN * 2, UART_HW_FIFO_LEN * 2, queue_size, &this->uart_event_queue, intr_alloc_flags);
         if (err != ESP_OK) {
             ESP_LOGE(TAG, "Failed to install UART driver: %s", esp_err_to_name(err));
             return false;
