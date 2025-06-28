@@ -72,7 +72,7 @@ class Controller {
 
     public:
         Controller(uart_port_t uart_num, uint8_t controller_address, const Callbacks& callbacks, QueueHandle_t uart_event_queue = nullptr)
-            : uart_port_t uart_num(uart_num), controller_address(controller_address), uart_event_queue(uart_event_queue), callbacks(callbacks) {}
+            : uart_num(uart_port_t uart_num), controller_address(controller_address), uart_event_queue(uart_event_queue), callbacks(callbacks) {}
 
         bool start();
         bool is_initialized() const { return this->initialization_stage == InitializationStageEnum::Complete; }
