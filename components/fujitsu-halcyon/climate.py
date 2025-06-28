@@ -53,7 +53,7 @@ CustomButton = fujitsu_halcyon_ns.class_("CustomButton", cg.Component, button.Bu
 CustomSwitch = fujitsu_halcyon_ns.class_("CustomSwitch", cg.Component, switch.Switch)
 FujitsuHalcyonController = fujitsu_halcyon_ns.class_("FujitsuHalcyonController", cg.Component, climate.Climate, uart.UARTDevice)
 
-CONFIG_SCHEMA = climate.CLIMATE_SCHEMA.extend(
+CONFIG_SCHEMA = climate.climate_shema.extend(
     {
         cv.GenerateID(): cv.declare_id(FujitsuHalcyonController),
         cv.Optional(CONF_CONTROLLER_ADDRESS, default=0): cv.int_range(0, 15),
