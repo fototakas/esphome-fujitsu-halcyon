@@ -301,8 +301,19 @@ void FujitsuHalcyonController::update_from_device(const fujitsu_general::airstag
     if (this->controller->get_features().SensorSwitching
         && this->temperature_sensor_ != nullptr
         && this->use_sensor_switch->is_internal()) {
+        
+        // Make entity visible in Home Assistant
         this->use_sensor_switch->set_internal(false);
-        ESP_LOGCONFIG(TAG, "  Use Sensor switch: exposed (SensorSwitching supported)");
+        
+        // Publish ON so HA immediately shows the switch ON
+        this->use_sensor_switch->publish_state(true);
+
+        // Send the command to the Fujitsu controller to start using the controller sensor.
+        // Pass ignore_lock_ if you've configured the component to ignore locks.
+        if (!this->controller->use_sensor(true, this->ignore_lock_))
+            ESP_LOGW(TAG, "Failed to set IU to use controller sensor");
+
+        ESP_LOGCONFIG(TAG, "  Use Sensor switch: exposed and set ON (SensorSwitching supported)");
     }
     
     // Target temperature / Setpoint
