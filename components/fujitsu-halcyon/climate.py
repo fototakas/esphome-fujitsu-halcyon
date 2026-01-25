@@ -96,7 +96,7 @@ CONFIG_SCHEMA = climate.climate_schema(FujitsuHalcyonController).extend(
         cv.Optional(CONF_USE_SENSOR, default={CONF_NAME: "Use Sensor", CONF_INTERNAL: True}): switch.switch_schema(
             CustomSwitch,
             entity_category=ENTITY_CATEGORY_CONFIG,
-            default_restore_mode="RESTORE_DEFAULT_OFF"
+            default_restore_mode="RESTORE_DEFAULT_ON"
         ),
         cv.Optional(CONF_REMOTE_SENSOR, default={CONF_NAME: "Remote Temperature Sensor", CONF_INTERNAL: True}): sensor.sensor_schema(
             Sensor,
