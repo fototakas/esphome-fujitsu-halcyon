@@ -294,6 +294,17 @@ void FujitsuHalcyonController::update_from_device(const fujitsu_general::airstag
     if (this->controller->get_features().FilterTimer && (!this->filter_sensor->has_state() || data.IndoorUnit.FilterTimerExpired != this->filter_sensor->state))
         this->filter_sensor->publish_state(data.IndoorUnit.FilterTimerExpired);
 
+    // Expose Use Sensor switch at runtime if the controller reports SensorSwitching support
+    // and a temperature sensor is configured for this component.
+    // Do this here (when we receive device/config data) rather than in traits(),
+    // because traits() can be invoked before features are discovered and entities registered.
+    if (this->controller->get_features().SensorSwitching
+        && this->temperature_sensor_ != nullptr
+        && this->use_sensor_switch->is_internal()) {
+        this->use_sensor_switch->set_internal(false);
+        ESP_LOGCONFIG(TAG, "  Use Sensor switch: exposed (SensorSwitching supported)");
+    }
+    
     // Target temperature / Setpoint
     if (data.Setpoint != this->target_temperature) {
         this->target_temperature = data.Setpoint;
